@@ -16,9 +16,9 @@ void Muta(int *x,int *y,int r,int c,int dx,int dy);
 //  - r raza cercului
 //  - c culoarea cercului
 
-// se vor defini 3 cercuri    
+// se vor defini 10 cercuri    
 
-int x1,y1,r1,c1, x2,y2,r2,c2, x3,y3,r3,c3, x4,y4,r4,c4 ; //variabilele pentru cele *4 cercuri
+int x[10],y[10],c[10],r[10];
 
 int main(void)
 {
@@ -38,27 +38,15 @@ int dx,dy;
 
 //urmeaza introducerea valorilor initiale pentru cercuri 
 //(initializarea cercurilor) 
-
-   x1=100;y1=200;r1= 25;c1=YELLOW; //initializarea variabilelor pt. cerc 1
-   setcolor(c1);                   //se seteaza culoarea c1
-   circle(x1,y1,r1);               //se deseneaza cercul cu centrul x1, y1
-                                   //    si de raza r1
-
-   x2=300;y2=200;r2= 50;c2=RED;    //initializarea variabilelor pt. cerc 2
-   setcolor(c2);                   //se seteaza culoarea c2
-   circle(x2,y2,r2);               //se deseneaza cercul cu centrul x2, y2 
-                                   //    si de raza r2
-
-   x3=500;y3=200;r3=100;c3=BLUE;   //initializarea variabilelor pt. cerc 3
-   setcolor(c3);                   //se seteaza culoarea c3
-   circle(x3,y3,r3);               //se deseneaza cercul cu centrul x3, y3 
-                                   //    si de raza r3
-
-	x4=400;y4=200;r4=10;c4=GREEN;   //initializarea variabilelor pt. cerc 4
-   setcolor(c4);                   //se seteaza culoarea c4
-   circle(x4,y4,r4);               //se deseneaza cercul cu centrul x4, y4 
-                                   //    si de raza r4
-   
+   for(int i=0; i<10; i++){
+		x[i]=200+10*i;
+		y[i]=200;
+		c[i]=1+i;
+		r[i]=5*i+20;
+		
+		setcolor(c[i]);                   
+		circle(x[i],y[i],r[i]);
+  } 
 // se intra intr-o bucla in care se ramane atata timp cat gata=0
    while(!gata)
      switch(getch())      //se asteapta apasarea unei taste
@@ -68,7 +56,7 @@ int dx,dy;
          break;
        case TAB:          //daca s-a apasat TAB se trece la urmatorul cerc
          CercCurent++;    //trecem la cercul urmator
-         CercCurent%=4;   //dupa cercul 2 urmeaza cercul 0 
+         CercCurent%=10;   //dupa cercul 2 urmeaza cercul 0 
          break;
        case 0:            //la apasarea unei sageti se genereaza intai 0. 
          switch(getch())  //apoi codul specific
@@ -85,21 +73,8 @@ int dx,dy;
 //pasul de deplasare pe orizontala si pe verticala este de 10 pixeli
 
 //dupa stabilirea valorilor pentru deplasari se muta cercul curent
-         switch(CercCurent)
-          {
-           case 0:                      //CercCurent=0
-             Muta(&x1,&y1,r1,c1,dx,dy); //mutarea cercului 1
-             break;
-           case 1:                      //CercCurent=1
-             Muta(&x2,&y2,r2,c2,dx,dy); //mutarea cercului 2
-             break;
-           case 2:                     //CercCurent=2
-             Muta(&x3,&y3,r3,c3,dx,dy); //mutarea cercului 3
-             break;
-			case 3:                     //CercCurent=3
-             Muta(&x4,&y4,r4,c4,dx,dy); //mutarea cercului 4
-             break;
-          }
+	Muta(&x[CercCurent],&y[CercCurent],r[CercCurent],c[CercCurent],dx,dy); //mutarea cercurilor
+        
          break;
        }
    closegraph();		//inchiderea modului grafic
